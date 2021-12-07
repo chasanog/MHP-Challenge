@@ -13,6 +13,9 @@
 		5350F2FB275F9965005718AD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5350F2F9275F9965005718AD /* Main.storyboard */; };
 		5350F2FD275F9965005718AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5350F2FC275F9965005718AD /* Assets.xcassets */; };
 		5350F300275F9965005718AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5350F2FE275F9965005718AD /* LaunchScreen.storyboard */; };
+		5350F30D275F99E0005718AD /* IAFHouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5350F30C275F99E0005718AD /* IAFHouse.swift */; };
+		5350F30F275F9A10005718AD /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5350F30E275F9A10005718AD /* APIService.swift */; };
+		5350F311275F9A22005718AD /* APIObjectParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5350F310275F9A22005718AD /* APIObjectParser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		5350F2FC275F9965005718AD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5350F2FF275F9965005718AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5350F301275F9965005718AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5350F30C275F99E0005718AD /* IAFHouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAFHouse.swift; sourceTree = "<group>"; };
+		5350F30E275F9A10005718AD /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		5350F310275F9A22005718AD /* APIObjectParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIObjectParser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +62,58 @@
 		5350F2F2275F9965005718AD /* MHP Challenge */ = {
 			isa = PBXGroup;
 			children = (
-				5350F2F3275F9965005718AD /* AppDelegate.swift */,
-				5350F2F5275F9965005718AD /* SceneDelegate.swift */,
-				5350F2F7275F9965005718AD /* ViewController.swift */,
+				5350F30B275F99C5005718AD /* ViewModels */,
+				5350F30A275F99C0005718AD /* Models */,
+				5350F309275F99B9005718AD /* Controllers */,
+				5350F308275F99AF005718AD /* API Service */,
+				5350F307275F99A7005718AD /* Common */,
 				5350F2F9275F9965005718AD /* Main.storyboard */,
 				5350F2FC275F9965005718AD /* Assets.xcassets */,
 				5350F2FE275F9965005718AD /* LaunchScreen.storyboard */,
 				5350F301275F9965005718AD /* Info.plist */,
 			);
 			path = "MHP Challenge";
+			sourceTree = "<group>";
+		};
+		5350F307275F99A7005718AD /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				5350F2F3275F9965005718AD /* AppDelegate.swift */,
+				5350F2F5275F9965005718AD /* SceneDelegate.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		5350F308275F99AF005718AD /* API Service */ = {
+			isa = PBXGroup;
+			children = (
+				5350F30E275F9A10005718AD /* APIService.swift */,
+				5350F310275F9A22005718AD /* APIObjectParser.swift */,
+			);
+			path = "API Service";
+			sourceTree = "<group>";
+		};
+		5350F309275F99B9005718AD /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				5350F2F7275F9965005718AD /* ViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		5350F30A275F99C0005718AD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5350F30C275F99E0005718AD /* IAFHouse.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		5350F30B275F99C5005718AD /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,6 +187,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				5350F2F8275F9965005718AD /* ViewController.swift in Sources */,
+				5350F30F275F9A10005718AD /* APIService.swift in Sources */,
+				5350F311275F9A22005718AD /* APIObjectParser.swift in Sources */,
+				5350F30D275F99E0005718AD /* IAFHouse.swift in Sources */,
 				5350F2F4275F9965005718AD /* AppDelegate.swift in Sources */,
 				5350F2F6275F9965005718AD /* SceneDelegate.swift in Sources */,
 			);
