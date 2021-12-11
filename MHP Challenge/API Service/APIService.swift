@@ -20,7 +20,7 @@ protocol APIObject {
 
 class APIService {
     
-    func downloadData<T: APIObject>(_ page: Int?, _ pageSize: Int?, completionHandler: @escaping(_ IAFHouse: [T]?, Error?) -> Void)
+    func downloadData<T: APIObject>(_ page: Int?, _ pageSize: Int?, completionHandler: @escaping(_ IAFHouse: [T]?, Error?, _ linkHeaders: LinkHeaderParser?) -> Void)
     {
         var urlString = "https://anapioficeandfire.com/api/houses"
         if page != nil || pageSize != nil {
@@ -40,10 +40,10 @@ class APIService {
         
         let url = URL(string: urlString)
         
-        apiCall(url) {(dictionaryArray: NSArray?, error: Error?) -> Void in
+        apiCall(url) {(dictionaryArray: NSArray?, error: Error?, linkHeaders: LinkHeaderParser?) -> Void in
             
             guard error == nil && dictionaryArray != nil else{
-                completionHandler(nil, error)
+                completionHandler(nil, error, nil)
                 return
             }
             var objectArray : [T] = []
@@ -52,11 +52,11 @@ class APIService {
                 let parsedObject = T(dictionary: dictionary as? NSDictionary)
                 objectArray.append(parsedObject!)
             }
-            completionHandler(objectArray, nil)
+            completionHandler(objectArray, nil, linkHeaders)
         }
     }
 
-    func apiCall<T>(_ url: URL!, completionHandler: @escaping (T?, Error?) -> Void) {
+    func apiCall<T>(_ url: URL!, completionHandler: @escaping (T?, Error?, LinkHeaderParser?) -> Void) {
         let req = NSMutableURLRequest(url: url)
         req.httpMethod = "GET"
         req.addValue("application/vnd.anapioficeandfire+json; version=1", forHTTPHeaderField: "Accept")
@@ -73,7 +73,7 @@ class APIService {
             guard error == nil else
             {
                 print("error not empty")
-                completionHandler(nil, error)
+                completionHandler(nil, error, nil)
                 return
             }
             
@@ -81,7 +81,7 @@ class APIService {
             guard urlResponse is HTTPURLResponse else
             {
                 print("HTTP ERROR")
-                completionHandler(nil, error)
+                completionHandler(nil, error, nil)
                 return
             }
             
@@ -91,77 +91,30 @@ class APIService {
             guard httpURLResponse.statusCode == 200 else
             {
                 print("200")
-                completionHandler(nil, error)
+                completionHandler(nil, error, nil)
                 return
             }
             
             guard data != nil else
             {
                 print("error")
-                completionHandler(nil, error)
+                completionHandler(nil, error, nil)
                 return
             }
-            
+            let linkHeaders = LinkHeaderParser(httpURLResponse: httpURLResponse)
             do {
                 let jsonDictionary = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
                 guard jsonDictionary is T else {
                     print("Not T")
                     return
                 }
-                completionHandler(jsonDictionary as? T, nil)
+                completionHandler(jsonDictionary as? T, nil, linkHeaders)
             }
             catch {
-                completionHandler(nil, String("Returned JSON from API was not valid") as? Error)
+                completionHandler(nil, String("Returned JSON from API was not valid") as? Error, nil)
             }
         }
         task.resume()
     }
-    
-    /*
-    
-    func apiCall<T: APIObject> (page: Int? = nil, pageSize: Int, completionHandler: @escaping (_ IAFHouse: T?, Error?) -> Void) {
-            
-        var pageSize = pageSize
-        
-        if pageSize > 50 || pageSize == 0 {
-            pageSize = 50
-            print("Page Size can't be greater ")
-        }
-        let url = NSURL(string:  "https://anapioficeandfire.com/api/houses/" + "?page=\(String(describing: page))&pageSize=\(pageSize)")!
-        
-        let session = URLSession.shared
-        session.dataTask(with: url as URL) {data, response, error in
-            guard error == nil else {
-                completionHandler(nil, String(error!.localizedDescription) as? Error)
-                return
-            }
-            
-            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode != 200 {
-                let code = "\(httpResponse.statusCode)"
-                let message = HTTPURLResponse.localizedString(forStatusCode: httpResponse.statusCode)
-                completionHandler(nil, String(code + " " + message) as? Error)
-                return
-            }
-            guard data != nil else {
-                completionHandler(nil, String("Data from API is empty") as? Error)
-                return
-            }
-            
-            do {
-                if let jsonDictionary = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? [String: AnyObject] {
-                    // TODO change to as [String: AnyObject]
-                    completionHandler(jsonDictionary as? AnyObject as! T, nil)
-                } else if let jsonArray = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? [[String:AnyObject]] {
-                    // TODO change to as [[String: AnyObject]]
-                    completionHandler(jsonArray as? AnyObject, nil)
-                } else {
-                    completionHandler(nil, String("The JSON returned from the API was invalid.") as? Error)
-                }
-            } catch {
-                completionHandler(nil, String("The JSON returned from the API was invalid.") as? Error)
-            }
-        }.resume()
-    }
-     */
     
 }

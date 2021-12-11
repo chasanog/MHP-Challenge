@@ -17,7 +17,19 @@
 		5350F30F275F9A10005718AD /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5350F30E275F9A10005718AD /* APIService.swift */; };
 		5350F311275F9A22005718AD /* APIObjectParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5350F310275F9A22005718AD /* APIObjectParser.swift */; };
 		53615E312762729500D3B450 /* HouseDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53615E302762729500D3B450 /* HouseDetailVC.swift */; };
+		53A564C82765565900271377 /* LinkHeaderParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A564C72765565900271377 /* LinkHeaderParser.swift */; };
+		53DBFCC52765632400C853E3 /* MHP_ChallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DBFCC42765632400C853E3 /* MHP_ChallengeTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		53DBFCC72765632400C853E3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5350F2E8275F9965005718AD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5350F2EF275F9965005718AD;
+			remoteInfo = "MHP Challenge";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		5350F2F0275F9965005718AD /* MHP Challenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MHP Challenge.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -32,10 +44,21 @@
 		5350F30E275F9A10005718AD /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		5350F310275F9A22005718AD /* APIObjectParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIObjectParser.swift; sourceTree = "<group>"; };
 		53615E302762729500D3B450 /* HouseDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HouseDetailVC.swift; sourceTree = "<group>"; };
+		53A564C72765565900271377 /* LinkHeaderParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkHeaderParser.swift; sourceTree = "<group>"; };
+		53DBFCC22765632400C853E3 /* MHP ChallengeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MHP ChallengeTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		53DBFCC42765632400C853E3 /* MHP_ChallengeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MHP_ChallengeTests.swift; sourceTree = "<group>"; };
+		53DBFCC62765632400C853E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		5350F2ED275F9965005718AD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		53DBFCBF2765632400C853E3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -49,6 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				5350F2F2275F9965005718AD /* MHP Challenge */,
+				53DBFCC32765632400C853E3 /* MHP ChallengeTests */,
 				5350F2F1275F9965005718AD /* Products */,
 			);
 			sourceTree = "<group>";
@@ -57,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				5350F2F0275F9965005718AD /* MHP Challenge.app */,
+				53DBFCC22765632400C853E3 /* MHP ChallengeTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -115,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				5350F310275F9A22005718AD /* APIObjectParser.swift */,
+				53A564C72765565900271377 /* LinkHeaderParser.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -125,6 +151,15 @@
 				5350F2F9275F9965005718AD /* Main.storyboard */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		53DBFCC32765632400C853E3 /* MHP ChallengeTests */ = {
+			isa = PBXGroup;
+			children = (
+				53DBFCC42765632400C853E3 /* MHP_ChallengeTests.swift */,
+				53DBFCC62765632400C853E3 /* Info.plist */,
+			);
+			path = "MHP ChallengeTests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -147,6 +182,24 @@
 			productReference = 5350F2F0275F9965005718AD /* MHP Challenge.app */;
 			productType = "com.apple.product-type.application";
 		};
+		53DBFCC12765632400C853E3 /* MHP ChallengeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 53DBFCCB2765632400C853E3 /* Build configuration list for PBXNativeTarget "MHP ChallengeTests" */;
+			buildPhases = (
+				53DBFCBE2765632400C853E3 /* Sources */,
+				53DBFCBF2765632400C853E3 /* Frameworks */,
+				53DBFCC02765632400C853E3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				53DBFCC82765632400C853E3 /* PBXTargetDependency */,
+			);
+			name = "MHP ChallengeTests";
+			productName = "MHP ChallengeTests";
+			productReference = 53DBFCC22765632400C853E3 /* MHP ChallengeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -158,6 +211,10 @@
 				TargetAttributes = {
 					5350F2EF275F9965005718AD = {
 						CreatedOnToolsVersion = 12.5.1;
+					};
+					53DBFCC12765632400C853E3 = {
+						CreatedOnToolsVersion = 12.5.1;
+						TestTargetID = 5350F2EF275F9965005718AD;
 					};
 				};
 			};
@@ -175,6 +232,7 @@
 			projectRoot = "";
 			targets = (
 				5350F2EF275F9965005718AD /* MHP Challenge */,
+				53DBFCC12765632400C853E3 /* MHP ChallengeTests */,
 			);
 		};
 /* End PBXProject section */
@@ -190,6 +248,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		53DBFCC02765632400C853E3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -202,12 +267,29 @@
 				53615E312762729500D3B450 /* HouseDetailVC.swift in Sources */,
 				5350F311275F9A22005718AD /* APIObjectParser.swift in Sources */,
 				5350F30D275F99E0005718AD /* IAFHouse.swift in Sources */,
+				53A564C82765565900271377 /* LinkHeaderParser.swift in Sources */,
 				5350F2F4275F9965005718AD /* AppDelegate.swift in Sources */,
 				5350F2F6275F9965005718AD /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		53DBFCBE2765632400C853E3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				53DBFCC52765632400C853E3 /* MHP_ChallengeTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		53DBFCC82765632400C853E3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5350F2EF275F9965005718AD /* MHP Challenge */;
+			targetProxy = 53DBFCC72765632400C853E3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		5350F2F9275F9965005718AD /* Main.storyboard */ = {
@@ -383,6 +465,46 @@
 			};
 			name = Release;
 		};
+		53DBFCC92765632400C853E3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SAX83W22A6;
+				INFOPLIST_FILE = "MHP ChallengeTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.chasanog.MHP-ChallengeTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MHP Challenge.app/MHP Challenge";
+			};
+			name = Debug;
+		};
+		53DBFCCA2765632400C853E3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SAX83W22A6;
+				INFOPLIST_FILE = "MHP ChallengeTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.chasanog.MHP-ChallengeTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MHP Challenge.app/MHP Challenge";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -400,6 +522,15 @@
 			buildConfigurations = (
 				5350F305275F9965005718AD /* Debug */,
 				5350F306275F9965005718AD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		53DBFCCB2765632400C853E3 /* Build configuration list for PBXNativeTarget "MHP ChallengeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				53DBFCC92765632400C853E3 /* Debug */,
+				53DBFCCA2765632400C853E3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

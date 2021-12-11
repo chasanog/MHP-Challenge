@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     var tempArray: [IAFHouse]?
     var pageSize: Int = 50
     var page: Int = 1
+    var linkHeaderTemp: LinkHeaderParser?
     
 
     @IBOutlet weak var tableView: UITableView!
@@ -24,14 +25,18 @@ class ViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
 
-        apiService.downloadData(page, 50) {(houseObject: [IAFHouse]?, error: Error?) -> Void in
+        apiService.downloadData(page, 50) {(houseObject: [IAFHouse]?, error: Error?, linkHeaders: LinkHeaderParser?) -> Void in
             self.tempArray = houseObject
             self.houseArray = self.tempArray!.compactMap{$0}
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
             print(self.houseArray!)
-            self.page += 1
+            if linkHeaders?.next != nil {
+                self.linkHeaderTemp = linkHeaders!
+                self.page += 1
+            }
+            
         }
         
     }
@@ -49,19 +54,21 @@ extension ViewController: UITableViewDataSource {
             cell.textLabel?.text = houseArray![indexPath.row].name
             
             if indexPath.row == (houseArray!.count - 1) {
-                if self.page < 10 {
-                    apiService.downloadData(page, 50) {(houseObject: [IAFHouse]?, error: Error?) -> Void in
+                if self.linkHeaderTemp?.next != nil || self.linkHeaderTemp?.last == self.linkHeaderTemp?.next{
+                    apiService.downloadData(page, 50) {(houseObject: [IAFHouse]?, error: Error?, linkHeaders: LinkHeaderParser?) -> Void in
                         self.tempArray = houseObject
                         self.houseArray! += self.tempArray!.compactMap{$0}
                         DispatchQueue.main.async {
                             self.tableView.reloadData()
                         }
                         print(self.houseArray!)
+                        self.linkHeaderTemp = linkHeaders!
                         self.page += 1
+                        
                     }
+                    
+                    
                 }
-                
-                
             }
         }
         return cell

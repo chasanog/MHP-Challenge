@@ -23,6 +23,7 @@ class HouseDetailVC: UIViewController {
     let cadetBranchesLabel = UILabel()
     let swordMembersLabel = UILabel()
     
+    
     let regionBold = "Region: "
     let coatsOfArmsBold = "Coats of Arms: "
     let wordsBold = "Words: "
@@ -39,6 +40,13 @@ class HouseDetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        switch traitCollection.userInterfaceStyle {
+        case .light, .unspecified:
+            view.backgroundColor = .white
+        case .dark:
+            view.backgroundColor = .black
+            
+        }
         safeArea = view.layoutMarginsGuide
         fillUILabelText()
         positionOfName()
@@ -50,8 +58,6 @@ class HouseDetailVC: UIViewController {
         positionOfNewLabel(titlesLabel, diedOutLabel)
         positionOfNewLabel(seatsLabel, titlesLabel)
         positionOfNewLabel(ancestralWeaponsLabel, seatsLabel)
-        view.backgroundColor = .white
-        
     }
     
     func formatStringPartially(_ boldString: String, _ normalString: String) -> NSMutableAttributedString{
