@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+// Detail View Controller for House element coming from root VC
 class HouseDetailVC: UIViewController {
     var houseForDV: IAFHouse?
     
@@ -22,6 +23,8 @@ class HouseDetailVC: UIViewController {
     let ancestralWeaponsLabel = UILabel()
     let cadetBranchesLabel = UILabel()
     let swordMembersLabel = UILabel()
+    
+    let closeButton = UIButton()
     
     
     let regionBold = "Region: "
@@ -58,17 +61,20 @@ class HouseDetailVC: UIViewController {
         positionOfNewLabel(titlesLabel, diedOutLabel)
         positionOfNewLabel(seatsLabel, titlesLabel)
         positionOfNewLabel(ancestralWeaponsLabel, seatsLabel)
+        positionOfCloseButton()
     }
     
-    func formatStringPartially(_ boldString: String, _ normalString: String) -> NSMutableAttributedString{
+    // given two strings one part will be bold -> returns NSMutableAttributedString
+    func formatStringPartially(_ boldString: String?, _ normalString: String) -> NSMutableAttributedString{
         let attrs = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 20)]
-        let attributedString = NSMutableAttributedString(string: boldString, attributes: attrs)
-        let normalRegion = NSMutableAttributedString(string: normalString)
-        attributedString.append(normalRegion)
+        let attributedString = NSMutableAttributedString(string: boldString ?? "", attributes: attrs)
+        let attributedNormalString = NSMutableAttributedString(string: normalString)
+        attributedString.append(attributedNormalString)
         
         return attributedString
     }
     
+    // fills Labels on this view with text
     func fillUILabelText() {
         houseNameLabel.text = houseForDV?.name
         
@@ -130,13 +136,14 @@ class HouseDetailVC: UIViewController {
         
     }
     
+    // positioning and formatting Name Label
     func positionOfName() {
         view.addSubview(houseNameLabel)
         houseNameLabel.translatesAutoresizingMaskIntoConstraints = false
         houseNameLabel.textAlignment = .center
         houseNameLabel.font = .preferredFont(forTextStyle: .largeTitle)
         houseNameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        houseNameLabel.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 20).isActive = true
+        houseNameLabel.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 100).isActive = true
         houseNameLabel.widthAnchor.constraint(equalTo: safeArea.widthAnchor, multiplier: 0.8).isActive = true
         houseNameLabel.heightAnchor.constraint(equalTo: houseNameLabel.heightAnchor).isActive = true
         houseNameLabel.numberOfLines = 0
@@ -144,6 +151,25 @@ class HouseDetailVC: UIViewController {
         houseNameLabel.frame = CGRect(x: houseNameLabel.frame.origin.x, y: houseNameLabel.frame.origin.y, width: houseNameLabel.frame.size.width, height: houseNameLabel.frame.size.height)
         
     }
+    
+    // positioning and formatting Close Button
+    func positionOfCloseButton() {
+        view.addSubview(closeButton)
+        let buttonSizeConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .bold, scale: .large)
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        closeButton.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -20).isActive = true
+        closeButton.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 30).isActive = true
+        closeButton.setImage(UIImage(systemName: "chevron.down", withConfiguration: buttonSizeConfig), for: .normal)
+        closeButton.tintColor = .gray
+      
+        closeButton.addTarget(self, action: #selector(closeAction), for: .touchUpInside)
+    }
+    // selector of positionfOfCloseButton()
+    @objc func closeAction() {
+        self.dismiss(animated: true)
+    }
+    
+    // reusable function to format and position any label with second label given for constraints
     func positionOfNewLabel(_ firstLabel: UILabel, _ secondLabel: UILabel) {
         view.addSubview(firstLabel)
         firstLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -160,6 +186,7 @@ class HouseDetailVC: UIViewController {
         firstLabel.lineBreakMode = .byWordWrapping
     }
     
+    // filling Label with response data when data is an array
     func fillLabelWithArray(label: UILabel, houseElement: [String]) {
         label.numberOfLines = houseElement.count + 1
         label.lineBreakMode = .byClipping
@@ -187,7 +214,21 @@ class HouseDetailVC: UIViewController {
                         }
                         
                     } else {
-                        label.text! += ",  \(str)"
+                        var prepareAttrStr: String = ""
+                        if str != houseElement.last {
+                            prepareAttrStr += ", \(str)"
+                        }
+                        else if str == houseElement.last {
+                            prepareAttrStr += "\(houseElement[0]), \(prepareAttrStr) \(str)"
+                        }
+                        if label == titlesLabel {
+                            label.attributedText = formatStringPartially("\(titleBold)s: ", prepareAttrStr)
+                        } else if label == seatsLabel {
+                            label.attributedText = formatStringPartially("\(seatsBold)s: ", prepareAttrStr)
+                        } else if label == ancestralWeaponsLabel {
+                            label.attributedText = formatStringPartially("\(ancestralBold)s: ", prepareAttrStr)
+                        }
+                        
                     }
                     
                 }

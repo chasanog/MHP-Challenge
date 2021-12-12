@@ -7,6 +7,7 @@
 
 import UIKit
 
+// root View Controller
 class ViewController: UIViewController {
     
     let apiService = APIService()
@@ -21,6 +22,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = "Game of Thrones Houses"
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -44,6 +46,7 @@ class ViewController: UIViewController {
 
 }
 
+// extension to fill tableview with data
 extension ViewController: UITableViewDataSource {
     
 
@@ -71,6 +74,7 @@ extension ViewController: UITableViewDataSource {
                 }
             }
         }
+        cell.textLabel?.textAlignment = .center
         return cell
     }
     
@@ -88,6 +92,7 @@ extension ViewController: UITableViewDataSource {
 
 }
 
+// extension for tablewview to manage selection of cell
 extension ViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

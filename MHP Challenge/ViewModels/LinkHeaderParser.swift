@@ -8,6 +8,7 @@
 import Foundation
 
 
+// Parser and initializer for Linkheaders used for pagination
 class LinkHeaderParser
 {
     var urlDictionary: [String: URL]!
@@ -36,6 +37,7 @@ class LinkHeaderParser
         self.first = self.urlDictionary["first"]
     }
     
+    // parsing Linkheaders returns array of String as URL
     func parseLinkHeadersString(_ string: String) -> [String: URL]?
     {
         var mutableDictionary: [String: URL] = [:]

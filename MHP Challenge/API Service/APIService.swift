@@ -7,19 +7,23 @@
 
 import Foundation
 
+
 protocol APIObject {
-    static var type: String {get}
     init? (dictionary: NSDictionary?)
-    init? (url: NSURL?)
     var url: NSURL? {get set}
     var name: String? {get set}
     var isDetailed: Bool {get}
 }
 
-
-
+// makes the call to the api and downloads data as JSON
 class APIService {
     
+    /*
+     downloads data conforms to APIObject protocol
+     parses the url string
+     calls the api via apiCall function
+     completionhandler notifies when download is done or when something happens badly
+     */
     func downloadData<T: APIObject>(_ page: Int?, _ pageSize: Int?, completionHandler: @escaping(_ IAFHouse: [T]?, Error?, _ linkHeaders: LinkHeaderParser?) -> Void)
     {
         var urlString = "https://anapioficeandfire.com/api/houses"
@@ -56,6 +60,12 @@ class APIService {
         }
     }
 
+    /*
+     function which is actually making the request to the api
+     defining required Headers and httpMethod
+     returns a json object containing the data
+     completionhandler notifies when it is done or when something happens badly
+     */
     func apiCall<T>(_ url: URL!, completionHandler: @escaping (T?, Error?, LinkHeaderParser?) -> Void) {
         let req = NSMutableURLRequest(url: url)
         req.httpMethod = "GET"
@@ -64,8 +74,6 @@ class APIService {
         
         let urlRequest = URLRequest(url: url)
         let session = URLSession.shared
-        
-        
                     
         let task = session.dataTask(with: urlRequest) { (data, urlResponse, error) in
             
@@ -90,14 +98,14 @@ class APIService {
             //** Make sure we got a 200
             guard httpURLResponse.statusCode == 200 else
             {
-                print("200")
+                print("HTTP Response code is not 200")
                 completionHandler(nil, error, nil)
                 return
             }
             
             guard data != nil else
             {
-                print("error")
+                print("data is nil")
                 completionHandler(nil, error, nil)
                 return
             }
@@ -105,7 +113,7 @@ class APIService {
             do {
                 let jsonDictionary = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
                 guard jsonDictionary is T else {
-                    print("Not T")
+                    print("jsonDictionary not type of \(T.self)")
                     return
                 }
                 completionHandler(jsonDictionary as? T, nil, linkHeaders)

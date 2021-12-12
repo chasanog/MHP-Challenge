@@ -13,6 +13,7 @@ import Foundation
 class APIObjectParser {
     
     
+    // checks if dictionary is valid
     class func dictionaryValid(dictionary: NSDictionary) -> Bool{
         if dictionary.count == 0 || dictionary["url"] == nil {
             return false
@@ -23,6 +24,7 @@ class APIObjectParser {
         
     }
 
+    // parsing string from dictionary
     class func stringFromDictionary(dictionary: NSDictionary, key: String) -> String? {
         if dictionary.object(forKey: key) != nil && dictionary.object(forKey: key) is String
         {
@@ -36,6 +38,7 @@ class APIObjectParser {
         return nil
     }
 
+    // parsing url from dictionary
     class func urlFromDictionary(dictionary: NSDictionary, key: String) -> NSURL? {
         if let string = dictionary[key] as? String, string != "" {
             return NSURL(string: string)
@@ -43,6 +46,7 @@ class APIObjectParser {
         return nil
     }
 
+    // parsing string[] from drictionary
     class func stringArrayFromDictionary<T>(dictionary: NSDictionary, key: String) -> Array<T>? {
         if dictionary.object(forKey: key) != nil && dictionary.object(forKey: key) is Array<T>
         {

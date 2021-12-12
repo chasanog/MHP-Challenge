@@ -10,11 +10,7 @@ import Foundation
 // Struct for Houses and parsing data with helper class APIObjectParser.swift
 struct IAFHouse: APIObject {
     
-    
-    
-    
-    static let type = "houses"
-    
+    // false if dictionary or url is empty
     var isDetailed: Bool
     var url: NSURL?
     var name: String?
@@ -33,15 +29,14 @@ struct IAFHouse: APIObject {
     var cadetBranches: [String]?
     var swordMembers:[String]?
     
+    
     init?(dictionary: NSDictionary?) {
         
         guard dictionary != nil else {
             self.isDetailed = false
             return nil
         }
-        isDetailed = APIObjectParser.dictionaryValid(dictionary: dictionary!)
-        
-        
+        isDetailed = APIObjectParser.dictionaryValid(dictionary: dictionary!)        
         self.url = APIObjectParser.urlFromDictionary(dictionary: dictionary!, key: "url")!
         self.name = APIObjectParser.stringFromDictionary(dictionary: dictionary!, key: "name")
         self.region = APIObjectParser.stringFromDictionary(dictionary: dictionary!, key: "region")
@@ -58,14 +53,5 @@ struct IAFHouse: APIObject {
         self.ancestralWeapons = APIObjectParser.stringArrayFromDictionary(dictionary: dictionary!, key: "ancestralWeapons")
         self.cadetBranches = APIObjectParser.stringArrayFromDictionary(dictionary: dictionary!, key: "cadetBranches")
         self.swordMembers = APIObjectParser.stringArrayFromDictionary(dictionary: dictionary!, key: "swornMembers")
-    }
-    
-    init?(url: NSURL?) {
-        guard url != nil else {
-            self.isDetailed = false
-            return nil
-        }
-        self.url = url
-        self.isDetailed = false
     }
 }

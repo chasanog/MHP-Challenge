@@ -19,6 +19,7 @@ class MHP_ChallengeTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
+    // testing download function of our APIService
     func testExample() throws {
         var houseArray: [IAFHouse]?
         var linkHeaders: LinkHeaderParser?
